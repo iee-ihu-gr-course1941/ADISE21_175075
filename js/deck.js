@@ -1,5 +1,5 @@
 const SUITS = ["♠", "♣", "♥", "♦"]
-const VALUES = ["A", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+const VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
 export function getDeck() {
 	let deck = new Array();
@@ -13,7 +13,7 @@ export function getDeck() {
 		}
 	}
 
-    let m = {Value: "K", Suit: "♣"}
+    let m = {Value: "K", Suit: "♠"}
     deck.push(m)
 
     shuffle(deck)
