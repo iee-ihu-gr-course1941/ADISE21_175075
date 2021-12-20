@@ -12,7 +12,7 @@
     // Post Object
     $post_id = new Post_Id($db);
 
-    $result = $post_id->read();
+    $result = $post_id->readAll();
 
     $num = $result->rowcOUNT();
 
@@ -25,7 +25,8 @@
             $post_item = array(
                 'id' => $id,
                 "time" => $time,
-                "inGame" => $inGame
+                "state" => $state,
+                "client_id" => $client_id
             );
 
             array_push($posts_arr['data'], $post_item);
