@@ -1,6 +1,6 @@
 <?php
     header('Access-Control-Allow-Origin: *');
-    header('Content-Type: application/jsom');
+    header('Content-Type: application/json');
 
     include_once '../config/Database.php';
     include_once '../config/client-id.php';

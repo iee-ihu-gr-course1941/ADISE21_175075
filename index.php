@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/script.js"></script>
     <title>Μουτζούρης</title>
 </head>
 <body>
@@ -17,9 +18,8 @@
   <div class="column side"></div>
   <div class="column middle">
     <div class="btn-group">
-        <button class="button" id="playBtn">Παίξε</button>
+        <button class="button" onclick="play()">Παίξε</button>
     </div>
-
   </div>
   <div class="column side">
   <h2>
