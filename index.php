@@ -17,9 +17,21 @@
 <div class="row">
   <div class="column side"></div>
   <div class="column middle">
-    <div class="btn-group">
-        <button class="button" onclick="play()">Παίξε</button>
+
+    <div id="inp" style="padding: 70px 0; border: 3px solid green; text-align: center; display:none">
+    <p>Εισάγετε τον κωδικό</p>
+      <form>
+        <input type="text" id="game_id" name="game_id">
+        <button id="">Παίξε</button>
+      </form>
     </div>
+
+    <div class="btn-group">
+        <button class="button" id="first" onclick="playF()">Παίξε με φίλο/η</button>
+        <button class="button" id="create" style="display: none;" onclick="createGame()" >Δημιούργησε παιχνίδι</button>
+        <button class="button" id="connect" style="display: none; margin-top: 50px" onclick="showInput()">Συνδέσου παιχνίδι</button>
+    </div>
+
   </div>
   <div class="column side">
   <h2>

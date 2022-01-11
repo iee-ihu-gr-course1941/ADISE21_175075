@@ -15,10 +15,10 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $post_id->client_id = $data->client_id;
-    $post_id->playWith = $data->playWith;
+    $post_id->game_id = $data->game_id;
+    $post_id->client_1 = $data->client_1;
 
-    if($post_id->insert_client()){
+    if($post_id->createGame()){
         echo json_encode(array('massage' => 'Post Created'));
     }else{
         echo json_encode(array('massage' => 'Post Not Created'));
