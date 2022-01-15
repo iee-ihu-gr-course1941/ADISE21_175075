@@ -15,14 +15,18 @@
 </div>
 
 <div class="row">
-  <div class="column side"></div>
+  <div class="column side">
+    <h2 id="gameIdTitle" style="display: none;">Κωδικός παιχνιδιού</h2>
+    <h3 id="gameId"></h3>
+  </div>
   <div class="column middle">
 
-    <div id="inp" style="padding: 70px 0; border: 3px solid green; text-align: center; display:none">
-    <p>Εισάγετε τον κωδικό</p>
-      <form>
-        <input type="text" id="game_id" name="game_id">
-        <button id="">Παίξε</button>
+    <div id="inp" style="padding: 70px 0; text-align: center; display:none">
+    <p id="insertCode">Εισάγετε τον κωδικό</p>
+      <form id="Form">
+        <input type="text" id="form" name="name" required>
+        <button type='button' onclick="connectToGame()">Παίξε</button>
+        <p id="wrong"></p>
       </form>
     </div>
 

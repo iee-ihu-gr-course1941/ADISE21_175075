@@ -5,7 +5,7 @@
 
 
     include_once '../config/Database.php';
-    include_once '../config/client-id.php';
+    include_once '../config/functions.php';
 
     $database = new Database();
     $db = $database->connect();

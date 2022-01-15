@@ -3,7 +3,7 @@
     header('Content-Type: application/json');
 
     include_once '../config/Database.php';
-    include_once '../config/client-id.php';
+    include_once '../config/functions.php';
 
     
     $database = new Database();
@@ -16,7 +16,7 @@
     $post_id->client_id = isset($_GET['client_id']) ? $_GET['client_id'] : die();
 
     $post_id->readClient();
-
+    
     $post_arr = array(
         'id' => $post_id->id,
         'time' => $post_id->time,

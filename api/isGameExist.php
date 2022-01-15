@@ -1,6 +1,8 @@
 <?php
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
+    header('Access-Control-Allow-Methods: POST');
+
 
     include_once '../config/Database.php';
     include_once '../config/functions.php';
@@ -12,24 +14,20 @@
     // Post Object
     $post_id = new Post_Id($db);
 
-    $result = $post_id->readAll();
+    $result = $post_id->isGameExist();
 
     $num = $result->rowcOUNT();
 
     if($num > 0){
         $posts_arr = array();
-        $posts_arr['data'] = array();
 
         while($row = $result->fetch(PDO::FETCH_ASSOC)){
             extract($row);
             $post_item = array(
-                'id' => $id,
-                "time" => $time,
-                "state" => $state,
-                "client_id" => $client_id
+                'game' => $game_id,
             );
 
-            array_push($posts_arr['data'], $post_item);
+            array_push($posts_arr, $post_item);
         }
 
         echo json_encode($posts_arr);

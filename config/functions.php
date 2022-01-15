@@ -10,6 +10,12 @@
         public $state;
         public $client_id;
         public $playWith;
+        public $game_id;
+        public $client_1;
+        public $client_2;
+        public $isOver;
+        public $turn;
+        public $num_rows;
         // Constructor with DB
 
         public function __construct($db)
@@ -70,6 +76,40 @@
             return false;
             
         }
+
+        public function isGameExist(){
+            $query = 'SELECT * FROM game';
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
             
+            return $stmt;
+
+        }
+
+        public function updateGame(){
+            $query = 'UPDATE game SET client_2 = :client_2 WHERE game_id = :game_id';
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':game_id', $this->game_id);
+            $stmt->bindParam(':client_2', $this->client_2);
+            if($stmt->execute()){
+                return true;
+            }
+            printf("Error: %s.\n", $stmt->error);
+                return false;    
+            }
+            
+        public function isGameReady(){
+            $query = 'SELECT * FROM game WHERE game_id = :game_id';
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(':game_id', $this->game_id);
+            if($stmt->execute()){
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                return  $this->client_2 = $row['client_2'];
+            }
+            printf("Error: %s.\n", $stmt->error);
+                return false;    
+            }
+            
+                
     }
 ?>
