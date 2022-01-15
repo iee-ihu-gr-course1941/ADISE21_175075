@@ -110,6 +110,29 @@
                 return false;    
             }
             
-                
+        public function shareCards(){
+            $query_1 = 'SELECT client_1 FROM game WHERE game_id = :game_id';
+
+            $stmt_1 = $this->conn->prepare($query_1);
+            $stmt_1->bindParam(':game_id', $this->game_id);
+            $stmt_1->execute();
+
+            $query_2 = 'SELECT client_2 FROM game WHERE game_id = :game_id';
+
+            $stmt_2 = $this->conn->prepare($query_2);
+            $stmt_2->bindParam(':game_id', $this->game_id);
+            $stmt_2->execute();
+
+            if($stmt_1->execute() && $stmt_2->execute()){
+                $row_1 = $stmt_1->fetch(PDO::FETCH_ASSOC);
+                $row_2 = $stmt_2->fetch(PDO::FETCH_ASSOC);
+                $array = array(
+                    "client_1" => $row_1['client_1'],
+                    "client_2" => $row_2['client_2'],
+                );
+                return  $array;
+            }
+
+            }       
     }
 ?>

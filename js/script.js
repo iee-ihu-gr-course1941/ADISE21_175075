@@ -82,6 +82,8 @@ function createGame(){
 
     if(isReady.message==="ready"){
         clearInterval(intervalId);
+
+
     }
       }, 2000);
 }
@@ -135,6 +137,20 @@ function connectToGame(){
         var hideTitle = document.getElementById("insertCode");
         hideTitle.style.display = "none";
 
+        var json = {
+            game_id: game_idFromForm
+        }; 
+
+        xhr.open('POST', 'http://localhost/adise/index.html/api/cardSharing.php', false);
+        xhr.setRequestHeader('Content-type', 'application/json');
+        xhr.onload = function(){
+        if(this.status == 200){
+            console.log(this.responseText);
+            status = JSON.parse(this.responseText);
+        }
+    }
+        xhr.send(JSON.stringify(json));
+
     }
 
     }else{
@@ -145,6 +161,8 @@ function connectToGame(){
     }else{
         alert("Παρακαλώ συμπληρώστε την φόρμα με τον κωδικό του παιχνιδιού")
     }
+
+
 }
 
 function showInput(){
