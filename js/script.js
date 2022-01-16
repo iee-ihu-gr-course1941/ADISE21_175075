@@ -95,7 +95,7 @@ function createGame(){// Function for the first player to create the game.
         hideElements();
     }
 
-    }, 2000);
+    }, 1000);
 }
 
 function hideElements(){

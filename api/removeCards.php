@@ -17,26 +17,18 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $post_id->client_id = $data->client_id;
+    $post_id->game_id = $data->game_id;
 
-    $result = $post_id->getCards();
+    $data = json_decode(file_get_contents("php://input"));
 
-    $num = $result->rowcOUNT();
+    $post_id->game_id = $data->game_id;
+    $post_id->client_id = $data->client_id;
+    $post_id->num = $data->num;
+    $post_id->suit = $data->suit;
 
-    if($num > 0){
-        $posts_arr = [];
-
-        while($row = $result->fetch(PDO::FETCH_ASSOC)){
-            extract($row);
-            $post_item = array(
-                "num" => $num,
-                "suit" => $suit,
-            );
-
-            array_push($posts_arr, $post_item);
-        }
-
-        echo json_encode($posts_arr);
+    if($post_id->updateCard()){
+        echo json_encode(array('massage' => 'card updated'));
     }else{
-        echo json_encode(array('massage' => 'no data'));
+        echo json_encode(array('massage' => 'card did not updated'));
     }
 ?>

@@ -16,6 +16,9 @@
         public $isOver;
         public $turn;
         public $num_rows;
+        public $num;
+        public $suit;
+        public $value;
         // Constructor with DB
 
         public function __construct($db)
@@ -136,7 +139,7 @@
             }      
             
             public function getCards(){
-                $query = 'SELECT card FROM cards WHERE client_id = :client_id AND burned = 0';
+                $query = 'SELECT num, suit FROM cards WHERE client_id = :client_id AND burned = 0';
                 $stmt = $this->conn->prepare($query);
                 $stmt->bindParam(':client_id', $this->client_id);
                 $stmt->execute();
@@ -150,6 +153,63 @@
                 $stmt->bindParam(':client_id', $this->client_id);
                 $stmt->execute();
                 return $stmt;
+            }
+
+            public function removeSameCards(){
+                $query = 'SELECT card FROM cards WHERE burned = 0 AND game_id = :game_id AND client_id = :client_id';
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(':game_id', $this->game_id);
+                $stmt->bindParam(':client_id', $this->client_id);
+                $stmt->execute();
+                return $stmt;
+            }
+
+            public function updateCard(){
+                $query = 'UPDATE cards SET burned = 1 WHERE game_id = :game_id AND client_id = :client_id AND num = :num AND suit = :suit';
+
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(':game_id', $this->game_id);
+                $stmt->bindParam(':client_id', $this->client_id);
+                $stmt->bindParam(':num', $this->num);
+                $stmt->bindParam(':suit', $this->suit);
+
+                if($stmt->execute()){
+                    return true;
+                }
+                printf("Error: %s.\n", $stmt->error);
+                return false;
+            }
+
+            public function getTurn(){
+                $query = 'SELECT turn FROM game WHERE game_id = :game_id';
+
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(':game_id', $this->game_id);
+                $stmt->execute();
+
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                $this->turn = $row['turn'];
+            }
+
+            public function pickedCard(){
+                $query = 'SELECT * FROM cards WHERE burned = 0 AND game_id = ? AND client_id <> ? LIMIT 1 OFFSET $value';
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(1, $this->game_id);
+                $stmt->bindParam(2, $this->client_id);
+                $stmt->bindParam(3, $this->value);
+                $stmt->execute();
+
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                $this->num = $row['num'];
+                $this->suit = $row['suit'];
+                $this->client_id = $row['client_id'];
+                $this->game_id = $row['game_id'];
+
+                $query2 = 'UPDATE cards SET client_id = $this->client_id WHERE game_id = $game_id AND num = $this->num AND suit = $this->num';
+                $stmt = $this->conn->prepare($query2);
+                $stmt->execute();
             }
     }
 ?>
