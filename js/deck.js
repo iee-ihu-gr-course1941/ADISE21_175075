@@ -1,37 +1,77 @@
-const SUITS = ["♠", "♣", "♥", "♦"]
-const VALUES = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+function startGame(client_id, game_id, turn){
+	var game_id = game_id;
+	var client_id = client_id;
+	var deck;
+	var enemy;
 
-export function getDeck() {
-	let deck = new Array();
+	var json = {
+        "client_id": id,
+		"game_id": game_id
+    }; 
+    
+	var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost/adise/index.html/api/sendCards.php', false);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onload = function(){
+    if(this.status == 200){
+        deck = JSON.parse(this.responseText);
+        }
+    }
+        xhr.send(JSON.stringify(json));
 
-	for(let i = 0; i < SUITS.length; i++)
-	{
-		for(let x = 0; x < VALUES.length; x++)
-		{
-			let card = {Value: VALUES[x], Suit: SUITS[i]};
-			deck.push(card);
-		}
-	}
+		var json2 = {
+			"client_id": client_id,
+			"game_id": game_id
+		};
+	
+	var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost/adise/index.html/api/getEnemy.php', false);
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.onload = function(){
+    if(this.status == 200){
+        enemy = JSON.parse(this.responseText);
+        }
+    }
+        xhr.send(JSON.stringify(json2));
 
-    let m = {Value: "K", Suit: "♠"}
-    deck.push(m)
+	document.getElementById("gameStart").innerHTML = "Το παιχνίδι ξεκίνησε!"
+	document.getElementById("c").style.display = "block";
+	document.getElementById("c2").style.display = "block";
 
-    shuffle(deck)
 
-	return deck;
+	renderDeck(deck);
+	renderEnemyDeck(enemy);
 }
 
-function shuffle(deck)
-{
-	// for 1000 turns
-	// switch the values of two random cards
-	for (let i = 0; i < 1000; i++)
-	{
-		let location1 = Math.floor((Math.random() * deck.length));
-		let location2 = Math.floor((Math.random() * deck.length));
-		let tmp = deck[location1];
+function renderDeck(deck){
+	for(var i = 0; i < deck.length; i++){
+		var card = document.createElement("div");
+		var icon = '';
+		if ((JSON.stringify(deck[i])).includes('H')){
+			icon='♥';
+		}
+		else if ((JSON.stringify(deck[i])).includes('S')){
+			icon = '♠';
+		}
+		else if ((JSON.stringify(deck[i])).includes('D')){
+			icon = '♦';
+		}
+		else if ((JSON.stringify(deck[i])).includes('C')){
+			icon = '♣';
+		}
 
-		deck[location1] = deck[location2];
-		deck[location2] = tmp;
+		card.innerHTML = JSON.stringify(deck[i]).substring(1,).split(" ",1) + ' ' + icon;
+		card.className = 'card';
+		document.getElementById("deck").appendChild(card);
+	}
+}
+
+function renderEnemyDeck(enemy){
+
+	for(var i = 0; i < enemy.number; i++){
+		var card = document.createElement("div");
+		card.innerHTML = i + 1;
+		card.className = 'card2';
+		document.getElementById("deck2").appendChild(card);
 	}
 }

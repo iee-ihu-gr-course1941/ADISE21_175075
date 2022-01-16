@@ -30,7 +30,7 @@
   .column.middle {
     width: 50%;
     background-color: #ffff;
-    margin-top: 100px;
+    margin-top: 10px;
   }
 
   .column.side{
@@ -75,6 +75,62 @@
   text-align: center;
 }
   
+
+.deck .card
+{
+  border: 2px solid #d53b3b;
+  border-radius: 2px;
+  background: #fff;
+  color: #444;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  display: inline-block;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.deck2 .card2
+{
+  border: 2px solid #000000;
+  border-radius: 2px;
+  background: #fff;
+  color: #444;
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  display: inline-block;
+  cursor: pointer;
+  padding: 20px;
+}
+
+.card .value{
+    font-size:15pt;
+    font-family: sans-serif;
+}
+
+.card .suit
+{
+	background-image: url('https://www.thatsoftwaredude.com/images/post/0f631eeb-6c4a-4bfd-9f86-e0a08ae8584b.png');
+	height: 100px;
+	width: 90px;
+}
+
+.card .diamonds
+{
+	background-position-y: 100px;
+}
+
+.card .hearts
+{
+	background-position-x: 90px;
+}
+
+.card .clubs
+{
+	background-position-x:90px;
+	background-position-y:100px;
+}
   /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
   @media (max-width: 600px) {
     .column.side, .column.middle {

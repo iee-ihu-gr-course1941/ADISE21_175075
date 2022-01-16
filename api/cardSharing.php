@@ -19,26 +19,28 @@
     $post_id->game_id = $data->game_id;
 
     $cards = Deck::cards();
-
+    $shuffled =  Deck::shuffle($cards);
+    
     $array = $post_id->shareCards();
+
     $client_1 = $array['client_1'];
     $client_2 = $array['client_2'];
 
     for($i = 0; $i < count($cards); $i++){
         if($i%2 == 0){
             $query = "INSERT INTO cards SET 
-                        card = '$cards[$i]', 
-                        client_id = '$client_1'";
+                        card = '$shuffled[$i]', 
+                        client_id = '$client_1', game_id = '$post_id->game_id'";
 
             $stmt = $db ->prepare($query);
             $stmt->execute();
         }else{
             $query = "INSERT INTO cards SET 
-                        card = '$cards[$i]', 
-                        client_id = '$client_2'";
+                        card = '$shuffled[$i]', 
+                        client_id = '$client_2', game_id = '$post_id->game_id'";
             $stmt = $db ->prepare($query);
             $stmt->execute();
         }
     }
 
-    echo json_encode(array('cards' => 'shared'));
+    echo json_encode(array('message' => 'shared'));

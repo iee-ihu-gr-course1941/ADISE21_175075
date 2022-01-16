@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
     <script src="js/script.js"></script>
+    <script src="js/deck.js"></script>
     <title>Μουτζούρης</title>
 </head>
 <body>
@@ -16,26 +17,37 @@
 
 <div class="row">
   <div class="column side">
-    <h2 id="gameIdTitle" style="display: none;">Κωδικός παιχνιδιού</h2>
+    <h2 id="gameIdTitle" style="display: none;">Κωδικός παιχνιδιού:</h2>
     <h3 id="gameId"></h3>
+    <h3 id="gameStart" style="display: none;">Δώσε τον κωδικό στον αντίπαλό σου.</h3>
   </div>
   <div class="column middle">
-
-    <div id="inp" style="padding: 70px 0; text-align: center; display:none">
+    <div id="inp" style="text-align: center; display:none">
     <p id="insertCode">Εισάγετε τον κωδικό</p>
       <form id="Form">
         <input type="text" id="form" name="name" required>
         <button type='button' onclick="connectToGame()">Παίξε</button>
         <p id="wrong"></p>
       </form>
+      <div class="deck">
+        <h3 id="c" style="display: none;">Οι κάρτες σου</h3>
+        <div id="deck"></div>
+      </div>
+      <div class="deck2">
+      <h3 id="c2" style="display: none;">Οι κάρτες του αντιπάλου</h3>
+        <div id="deck2"></div>
+      </div>
     </div>
-
+    
+<br>
+<br>
+<br>
+<br>
     <div class="btn-group">
         <button class="button" id="first" onclick="playF()">Παίξε με φίλο/η</button>
         <button class="button" id="create" style="display: none;" onclick="createGame()" >Δημιούργησε παιχνίδι</button>
         <button class="button" id="connect" style="display: none; margin-top: 50px" onclick="showInput()">Συνδέσου παιχνίδι</button>
-    </div>
-
+    </div>`
   </div>
   <div class="column side">
   <h2>

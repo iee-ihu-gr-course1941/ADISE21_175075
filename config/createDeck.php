@@ -8,8 +8,8 @@ class Deck{
 	 */
 	public static function cards(){
 		$values = array('2', '3', '4', '5', '6', '7', '8', '9', '10', '1');
-		$suits  = array('S', 'H', 'D', 'C');
-		$moutzouris = 'KS';
+		$suits  = array(' S', ' H', ' D', ' C');
+		$moutzouris = 'K S';
 		$cards = array();
 		foreach ($suits as $suit) {
 			foreach ($values as $value) {

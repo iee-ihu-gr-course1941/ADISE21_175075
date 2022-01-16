@@ -7,6 +7,7 @@
     include_once '../config/Database.php';
     include_once '../config/functions.php';
 
+    
     $database = new Database();
     $db = $database->connect();
 
@@ -15,10 +16,17 @@
 
     $data = json_decode(file_get_contents("php://input"));
 
+    $post_id->client_id = $data->client_id;
     $post_id->game_id = $data->game_id;
 
-    if($post_id->isGameReady() != null){
-        echo json_encode(array('message' => 'ready'));
+    $result = $post_id->getEnemyDeck();
+
+    $num = $result->rowcOUNT();
+
+    if($num > 0){
+            echo json_encode(array('number' => $num));
+
     }else{
-        echo json_encode(array('message' => 'waiting for seccond player'));
+        echo json_encode(array('number' => 0));
     }
+?>

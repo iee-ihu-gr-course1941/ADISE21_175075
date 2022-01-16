@@ -133,6 +133,23 @@
                 return  $array;
             }
 
-            }       
+            }      
+            
+            public function getCards(){
+                $query = 'SELECT card FROM cards WHERE client_id = :client_id AND burned = 0';
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(':client_id', $this->client_id);
+                $stmt->execute();
+                return $stmt;
+            }
+
+            public function getEnemyDeck(){
+                $query = 'SELECT * FROM cards WHERE burned = 0 AND game_id = :game_id AND client_id <> :client_id';
+                $stmt = $this->conn->prepare($query);
+                $stmt->bindParam(':game_id', $this->game_id);
+                $stmt->bindParam(':client_id', $this->client_id);
+                $stmt->execute();
+                return $stmt;
+            }
     }
 ?>

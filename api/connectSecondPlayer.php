@@ -21,5 +21,5 @@
     if($post_id->updateGame()){
         echo json_encode(array('massage' => 'connected'));
     }else{
-        echo json_encode(array('massage' => 'somthing went wrong'));
+        echo json_encode(array('massage' => 'waiting for seccond player'));
     }
