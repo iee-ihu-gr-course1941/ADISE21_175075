@@ -20,6 +20,7 @@
     <h2 id="gameIdTitle" style="display: none;">Κωδικός παιχνιδιού:</h2>
     <h3 id="gameId"></h3>
     <h3 id="gameStart" style="display: none;">Δώσε τον κωδικό στον αντίπαλό σου.</h3>
+    <h3 id="turn"></h3>
   </div>
   <div class="column middle">
     <div id="inp" style="text-align: center; display:none">

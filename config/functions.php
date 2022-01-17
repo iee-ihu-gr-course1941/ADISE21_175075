@@ -193,23 +193,35 @@
             }
 
             public function pickedCard(){
-                $query = 'SELECT * FROM cards WHERE burned = 0 AND game_id = ? AND client_id <> ? LIMIT 1 OFFSET $value';
+                $query = 'SELECT * FROM cards WHERE burned = 0 AND game_id = ? AND client_id <> ? LIMIT 1 OFFSET ' .$this->value.'';
                 $stmt = $this->conn->prepare($query);
                 $stmt->bindParam(1, $this->game_id);
                 $stmt->bindParam(2, $this->client_id);
-                $stmt->bindParam(3, $this->value);
                 $stmt->execute();
 
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
                 $this->num = $row['num'];
                 $this->suit = $row['suit'];
-                $this->client_id = $row['client_id'];
+                //$this->client_id = $row['client_id'];
                 $this->game_id = $row['game_id'];
 
-                $query2 = 'UPDATE cards SET client_id = $this->client_id WHERE game_id = $game_id AND num = $this->num AND suit = $this->num';
-                $stmt = $this->conn->prepare($query2);
-                $stmt->execute();
+                $query2 = 'UPDATE cards SET client_id = :client_id  WHERE game_id = :game_id AND num = :num AND suit = :suit AND burned = 0';
+
+                $stmt2 = $this->conn->prepare($query2);
+                $stmt2->bindParam(':client_id', $this->client_id);
+                $stmt2->bindParam(':game_id', $this->game_id);
+                $stmt2->bindParam(':num', $this->num);
+                $stmt2->bindParam(':suit', $this->suit);
+                $stmt2->execute();
+            }
+            public function changeTurn(){
+
+                $query2 = 'UPDATE game SET turn = :turn  WHERE game_id = :game_id';
+                $stmt2 = $this->conn->prepare($query2);
+                $stmt2->bindParam(':turn', $this->turn);
+                $stmt2->bindParam(':game_id', $this->game_id);
+                $stmt2->execute();
             }
     }
 ?>

@@ -17,13 +17,15 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $post_id->game_id = $data->game_id;
-    $post_id->client_id = $data->client_id;
-    $post_id->value = $data->value;
+    $post_id->turn = $data->turn;
 
-    $post_id->pickedCard();
 
-    echo json_encode($post_item = array(
-        "num" => $post_id->num,
-        "suit" => $post_id->suit
-    ));
+    if($post_id->turn == 1){
+        $post_id->turn = 2;
+    }else if($post_id->turn == 2){
+        $post_id->turn = 1;
+    }
+    $post_id->changeTurn();
+
+    echo json_encode($post_id->turn);
 ?>
