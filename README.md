@@ -1,5 +1,7 @@
 # ADISE21_175075
 
+### Play the game here! https://users.it.teithe.gr/~it175075/
+
 ## Card game called Moutzouris
 
 - ## **Target of the game**
@@ -56,4 +58,63 @@ You need to create the database named 'database' in Mysql and upload the data fr
    
    # **API**
    ## **Methods**
+   ```
+   GET /client/
+   ```
+   >returns clients informations
+   ```
+   GET /all-clients/
+   ```
+   >returns all clients with all the informations
+   ```
+   POST /create-client/
+   ```
+   >create client
+   ```
+   POST /create-game/
+   ```
+   >create the game
+   ```
+   POST /isGameReady/
+   ```
+   >return if the game is ready
+   ```
+   GET /isGameExist/
+   ```
+   >return if a game exist
+   ```
+   POST /connectSecondPlayer/
+   ```
+   >put second player in the game
+   ```
+   POST /cardSharing/
+   ```
+   >create a deck of cards
+   ```
+   POST /getTurn/
+   ```
+   >returns whose turn it is to play
+   ```
+   POST /sendCards/
+   ```
+   >sends the cards to the player
+   ```
+   POST /getEnemy/
+   ```
+   >returns the number of enemies cards
+   ```
+   POST /pickedCard/
+   ```
+   >returns the picked card
+   ```
+   POST /changeTurn/
+   ```
+   >change the turn
+   ```
+   POST /removeCards/
+   ```
+   >removes the same cards from the players hand
+   
+   
+   
    
